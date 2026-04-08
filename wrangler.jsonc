@@ -1,0 +1,27 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "d1-rest",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-03-03",
+    "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "cityfuture-db",
+          "database_id": "ee2758d0-c3c3-41fa-81aa-719e637ec28a"
+        }
+    ],
+    "secrets_store_secrets": [
+        {
+            "store_id": "ee72e171ee754dfca6898d3261f9eca3",
+            "binding": "SECRET",
+            "secret_name": "cityfuture-db-secret"
+        }
+    ],
+	"observability": {
+		"enabled": true
+	}
+}
