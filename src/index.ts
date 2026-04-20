@@ -25,11 +25,11 @@ app.use('*', async (c, next) => {
 app.get('/', (c) => {
   return c.text('Hello from Hono + D1!')
 })
-
+PRAGMA table_list
 // Optional: view logs
 app.get('/logs', async (c) => {
   const { results } = await c.env.DB.prepare(
-    `SELECT * FROM requests ORDER BY created_at DESC LIMIT 50`
+    `SELECT * FROM requests`
   ).all()
 
   return c.json(results)
