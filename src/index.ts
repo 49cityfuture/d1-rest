@@ -11,11 +11,12 @@ app.use('*', async (c, next) => {
   const { method } = c.req
   const url = c.req.url
   const userAgent = c.req.header('user-agent') || 'unknown'
+  const ip = c.req.header('cf-forwarding-ip')
 
   await c.env.DB.prepare(
-    `INSERT INTO requests (method, url, user_agent) VALUES (?, ?, ?)`
+    `INSERT INTO requests (method, url, user_agent, ip) VALUES (?, ?, ?, ?)`
   )
-    .bind(method, url, userAgent)
+    .bind(method, url, userAgent, ip)
     .run()
 
   await next()
