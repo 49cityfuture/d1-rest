@@ -28,6 +28,14 @@ app.get('/', (c) => {
 
 // Optional: view logs
 app.get('/logs', async (c) => {
+
+    const apiKey = c.req.header('x-api-key')
+  const expectedKey = c.env.LOGS_API_KEY
+
+  if (!apiKey || apiKey !== expectedKey) {
+    return c.text('Unauthorized', 401)
+  }
+
   const { results } = await c.env.DB.prepare(
     `SELECT * FROM requests`
   ).all()
